@@ -1,0 +1,24 @@
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Stream Demo</title>
+    <style>
+        video { width: 100%; max-width: 600px; }
+    </style>
+    <script>
+        async function startLiveStream() {
+            const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+            const videoElement = document.getElementById('live-video');
+            videoElement.srcObject = stream;
+            videoElement.play();
+        }
+    </script>
+</head>
+<body>
+    <h1>Live Stream Demo</h1>
+    <video id="live-video" autoplay muted></video>
+    <button onclick="startLiveStream()">Start Live Stream</button>
+</body>
+</html>

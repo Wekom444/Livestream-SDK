@@ -1,0 +1,14 @@
+{
+  "name": "live_stream",
+  "version": "1.0.0",
+  "description": "Live streaming module for e-commerce",
+  "main": "server.js",
+  "dependencies": {
+    "ws": "^8.0.0"
+  },
+  "scripts": {
+    "start": "node server.js"
+  },
+  "author": "wekom",
+  "license": "MIT"
+}
