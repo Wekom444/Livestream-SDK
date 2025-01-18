@@ -1,0 +1,22 @@
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Stream</title>
+    <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+    <h1>Live Stream</h1>
+    <video id="live-video" autoplay></video>
+    <script>
+        const socket = new WebSocket('ws://localhost:8080');
+
+        socket.onmessage = event => {
+            console.log('Message from server:', event.data);
+        };
+
+        // Implement video stream here
+    </script>
+</body>
+</html>
