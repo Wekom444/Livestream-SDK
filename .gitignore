@@ -1,0 +1,37 @@
+# Node.js-specific files
+node_modules/       # Exclude Node.js packages
+npm-debug.log*      # Exclude npm debug logs
+yarn-debug.log*
+yarn-error.log*
+
+# Build/Generated files
+dist/               # Exclude build output
+build/              # Exclude build output
+
+# Logs
+*.log               # General log files
+logs/
+*.out
+*.err
+
+# Temporary files
+*.tmp
+*.bak
+*.swp
+*.swo
+
+# Environment variables
+.env                # Sensitive API keys/configurations
+
+# Operating system-specific files
+.DS_Store           # macOS-specific metadata
+Thumbs.db           # Windows-specific metadata
+
+# IDE/Editor-specific files
+.vscode/            # Visual Studio Code settings
+.idea/              # IntelliJ/WebStorm settings
+*.iml               # IntelliJ module files
+
+# Streaming SDK-specific temporary files
+temp_streams/       # Temporary video or stream files
+recordings/         # Stream recordings (if generated)
