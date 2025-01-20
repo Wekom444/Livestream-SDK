@@ -1,121 +1,150 @@
 
-livestream-SDK
-Overview
-The Livestream-SDK is a robust and scalable module for integrating real-time live video streaming into web applications. Designed for e-commerce platforms, online education, social platforms, and gaming, this SDK offers seamless audio-video streaming with low latency and high performance.  
+ LiveStream-SDK  
 
-Key Features 
-1. Real-Time Live Streaming
-   - High-quality video and audio with minimal delay.  
-   - Optimized for peer-to-peer and server-based streaming using WebRTC.  
+ Overview  
+The LiveStream-SDK is a powerful, production-ready module that allows seamless integration of real-time video streaming into your web applications. Built for e-commerce platforms, online education, social platforms, and gaming, this SDK ensures high-quality, low-latency audio-video streaming while maintaining scalability and security.  
 
-2. Interactive Capabilities
-   - Real-time chat and audience engagement tools.  
-   - Support for polls, reactions, and Q&A.  
+This SDK is proprietary and designed for commercial use. Redistribution or reverse-engineering of the SDK is prohibited without explicit permission.  
 
-3. Customizable UI
-   - Fully customizable templates for player controls and layouts.  
-   - Modify `assets/styles.css` to match your brand’s design.  
 
-4. Scalable and Secure 
-   - Designed to handle a growing number of viewers.  
-   - Includes encryption and role-based access control.  
 
-5. Multi-Device Compatibility
-   - Works seamlessly on desktops, tablets, and mobile devices.  
+ Key Features  
 
----
+1. Real-Time Streaming  
+   - High-quality video and audio with low latency.  
+   - WebRTC-based optimized streaming for both peer-to-peer and server-based configurations.  
 
-Setup
+2. Audience Engagement Tools 
+   - Built-in support for live chat, reactions, polls, and Q&A.  
 
-Prerequisites
-1. Install **Node.js**: [Download Here](https://nodejs.org/).  
-2. Install dependencies: Ensure you have the necessary libraries installed via `npm`.  
+3. Customizable UI 
+   - Adaptable layouts and controls to match your brand.  
 
-Installation 
-1. Clone this repository:  
+4. Scalability and Security  
+   - Handles a large number of viewers without compromising performance.  
+   - Secure role-based access and encrypted connections.  
+
+5. Multi-Device Compatibility  
+   - Runs flawlessly across desktops, tablets, and mobile devices.  
+
+6. Ready-to-Deploy  
+   - Easily deployable to platforms like GitHub Pages for quick testing and demonstrations.  
+
+
+
+Installation and Setup  
+
+Prerequisites  
+1. Node.js: Ensure that the latest LTS version of Node.js is installed. [Download Here](https://nodejs.org/).  
+2. A code editor like Visual Studio Code.  
+
+Installation Steps  
+1. Clone the repository:  
    ```bash
    git clone https://github.com/Wekom444/LiveStream-SDK.git
    cd LiveStream-SDK
-   ```
-2. Install dependencies:  
+   ```  
+
+2. Install required dependencies:  
    ```bash
    npm install
-   ```
-3. Start the WebSocket server:  
+   ```  
+
+3. Build the project:  
+   ```bash
+   npm run build
+   ```  
+
+4. Start the WebSocket server:  
    ```bash
    npm start
-   ```
+   ```  
 
----
+5. Optionally, deploy the SDK on GitHub Pages:  
+   ```bash
+   npm run deploy
+   ```  
 
-Usage
 
-Running the Client  
-1. Open `client.html` in a web browser.  
-2. Ensure the server is running (`ws://localhost:8080`).  
-3. Start your live stream by broadcasting from the client.
+Usage  
 
----
+Running Locally  
+1. Navigate to the `dist/` folder after building the project:  
+   ```bash
+   cd dist
+   ```  
+2. Open `index.html` in your preferred browser to view the live stream interface.  
 
-Integration
+Live Deployment via GitHub Pages  
+1. Access your deployment at: `https://<username>.github.io/LiveStream-SDK/`.  
+2. The live page should display a "Welcome to LiveStream SDK" message.  
 
-Back-End Setup
-The server is built with **Node.js** to handle WebSocket connections.  
-- You can modify `server.js` to add custom functionality, such as logging, authentication, or analytics.
+Integration into Your Application  
+1. Include the SDK's files in your application:  
+   ```html
+   <script src="bundle.js"></script>  
+   <link rel="stylesheet" href="styles.css">  
+   ```  
+2. Use the SDK's components to set up a live streaming environment. Refer to the included `index.html` for structure and design ideas.  
 
-Front-End Integration 
-1. Include the necessary assets and scripts from this SDK in your web application.  
-2. Modify `client.html` or integrate its components into your existing web application.  
-   - Example:
-     ```html
-     <script src="sdk/live-stream.js"></script>
-     <link rel="stylesheet" href="sdk/assets/styles.css">
-     ```
 
-3. Update the WebSocket URL (`ws://localhost:8080`) to point to your deployed server.
+ Customization  
 
----
+ Frontend  
+- Styling: Modify `assets/styles.css` to match your application's branding.  
+- UI Components: Adjust `src/index.html` to add or remove features like chat, Q&A, or reactions.  
 
-Customization
+Backend  
+- WebSocket Server: Update `server.js` to include custom functionality, such as authentication, analytics, or logging.  
 
-1. CSS  
-   - Modify `assets/styles.css` to change the look and feel of the live stream interface.  
+New Features  
+- Extend the SDK by writing additional JavaScript modules or integrating third-party libraries (if licensed for commercial use).  
 
-2. Server Configurations  
-   - Edit `server.js` to:
-     - Enable authentication for stream security.
-     - Log viewer statistics or broadcast events.
 
-3. Add New Features 
-   - Extend the `client.html` functionality to include chat, reactions, or user feedback.
 
----
+ Resources  
 
-Testing
+Included Packages and Tools  
+-Webpack: For efficient bundling and asset management.  
+- HtmlWebpackPlugin: Automates `index.html` generation for deployment.  
+- TerserPlugin: Minifies JavaScript for better performance.  
+- Webpack Bundle Analyzer: Visualizes the size of output files.  
 
-1. Use **Postman** or **cURL** to simulate WebSocket connections and ensure the server responds correctly.  
-2. Test on multiple devices (desktop, tablet, mobile) to ensure compatibility.
 
----
 
-Troubleshooting
+Testing  
 
-1. Server Not Starting
-   - Ensure Node.js is installed correctly.
-   - Check for missing dependencies using:
-     ```bash
-     npm install
-     ```
-2. WebSocket Connection Fails
-   - Verify the server URL (`ws://localhost:8080`) is correct.  
-   - Check for firewall or network restrictions.  
+Local Testing  
+1. Verify server functionality by starting the WebSocket server:  
+   ```bash
+   npm start
+   
+2. Open `index.html` in a browser and ensure all features function as expected.  
 
-3. UI Issues
-   - Clear browser cache or refresh CSS changes.
+ Cross-Device Compatibility  
+- Test the application on multiple devices (desktop, tablet, and mobile) to ensure consistent performance and UI behavior.  
 
----
 
-Licensing
-This SDK is licensed under a custom license. Users must purchase a license to use or integrate the SDK commercially. Redistribution is prohibited.  
 
-For inquiries, contact: eriwikom@gmail.com  
+Licensing  
+
+The LiveStream-SDK is a proprietary software product.  
+- Commercial Use: Requires a purchased license for legal integration into projects.  
+- Prohibited Actions: Redistribution, reverse engineering, or unauthorized use of the SDK is strictly forbidden.  
+
+Licensing Agreement  
+By using this SDK, you agree to the terms of the licensing agreement. For inquiries or licensing requests, please contact: eriwikom@gmail.com
+
+
+
+ Important Notes  
+
+1. Exclusive Access: This SDK provides access to pre-built functionalities for live streaming, ensuring developers can save time while focusing on core application features.  
+2. Proprietary Assets: All scripts, libraries, and processes are protected by copyright and are not to be shared or resold without permission.  
+3. Commercial Support: For technical assistance or custom modifications, please reach out to the author directly.  
+
+
+
+Contact  
+For support or business inquiries, email:eriwikom@gmail.com
+
