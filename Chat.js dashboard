@@ -1,0 +1,16 @@
+fetch('/analytics-data')
+  .then(response => response.json())
+  .then(data => {
+    new Chart(document.getElementById("salesChart"), {
+        type: 'line',
+        data: {
+            labels: data.dates,
+            datasets: [{
+                label: "Sales Trend",
+                data: data.sales,
+                borderColor: "blue",
+                fill: false
+            }]
+        }
+    });
+});
