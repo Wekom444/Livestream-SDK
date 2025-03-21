@@ -1,22 +1,90 @@
 
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Live Stream</title>
-    <link rel="stylesheet" href="assets/styles.css">
+    <title>LiveStream with Ads, Chat & Polls</title>
 </head>
 <body>
-    <h1>Live Stream</h1>
-    <video id="live-video" autoplay></video>
-    <script>
-        const socket = new WebSocket('ws://localhost:8080');
+    <video id="liveVideo" controls autoplay></video>
+    
+    <!-- Live Chat -->
+    <div id="chat">
+        <input type="text" id="messageInput" placeholder="Type a message...">
+        <button onclick="sendMessage()">Send</button>
+        <ul id="chatMessages"></ul>
+    </div>
 
-        socket.onmessage = event => {
-            console.log('Message from server:', event.data);
+    <!-- Polls -->
+    <div id="polls">
+        <p>Which product do you prefer?</p>
+        <button onclick="votePoll('Product A')">Product A</button>
+        <button onclick="votePoll('Product B')">Product B</button>
+    </div>
+
+    <!-- Reactions -->
+    <div id="reactions">
+        <button onclick="sendReaction('❤️')">❤️</button>
+        <button onclick="sendReaction('🔥')">🔥</button>
+        <button onclick="sendReaction('👍')">👍</button>
+    </div>
+
+    <!-- Ads -->
+    <div id="ad-container">
+        <p id="ad-title"></p>
+        <video id="adVideo" controls></video>
+    </div>
+
+    <script>
+        const socket = new WebSocket("wss://livestream-env.eba-xyz123.us-east-1.elasticbeanstalk.com");
+
+        socket.onopen = function () {
+            console.log("Connected to Livestream WebSocket");
+            requestAd(); // Request an ad when connected
         };
 
-        // Implement video stream here
+        socket.onmessage = function (event) {
+            const data = JSON.parse(event.data);
+            
+            if (data.type === "chat") {
+                document.getElementById("chatMessages").innerHTML += `<li>${data.message}</li>`;
+            }
+
+            if (data.type === "poll") {
+                console.log("Poll update:", data.pollData);
+            }
+
+            if (data.type === "ad") {
+                document.getElementById("ad-title").innerText = data.ad.title;
+                document.getElementById("adVideo").src = data.ad.videoUrl;
+                document.getElementById("adVideo").play();
+            }
+
+            if (data.type === "inventory") {
+                console.log("Updated Inventory:", data.data);
+            }
+        };
+
+        socket.onclose = function () {
+            console.log("WebSocket connection closed");
+        };
+
+        function sendMessage() {
+            const message = document.getElementById("messageInput").value;
+            socket.send(JSON.stringify({ type: "chat", message }));
+            document.getElementById("messageInput").value = "";
+        }
+
+        function votePoll(choice) {
+            socket.send(JSON.stringify({ type: "poll-vote", choice }));
+        }
+
+        function sendReaction(reaction) {
+            socket.send(JSON.stringify({ type: "reaction", reaction }));
+        }
+
+        function requestAd() {
+            socket.send(JSON.stringify({ type: "request-ad" }));
+        }
     </script>
 </body>
 </html>
+
