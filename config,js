@@ -1,0 +1,43 @@
+require("dotenv").config();
+const mysql = require("mysql2/promise");
+
+// Create a MySQL connection pool using environment variables
+const db = mysql.createPool({
+  host: process.env.RDS_HOST,
+  user: process.env.RDS_USER,
+  password: process.env.RDS_PASSWORD,
+  database: process.env.RDS_DATABASE,
+  waitForConnections: true,
+  connectionLimit: 10,
+});
+
+// Function to fetch API credentials per client domain from the 'client_configs' table
+async function getClientAPI(domain) {
+  try {
+    const [rows] = await db.query(
+      "SELECT api_base_url, api_token FROM client_configs WHERE domain = ?",
+      [domain]
+    );
+    if (rows.length > 0) {
+      return { apiBaseUrl: rows[0].api_base_url, apiToken: rows[0].api_token };
+    } else {
+      throw new Error("Client configuration not found");
+    }
+  } catch (error) {
+    console.error("Error fetching client API details:", error);
+    return null;
+  }
+}
+
+// Export all configuration values and helper function
+module.exports = {
+  SECRET_KEY: process.env.JWT_SECRET,
+  RDS_HOST: process.env.RDS_HOST,
+  RDS_USER: process.env.RDS_USER,
+  RDS_PASSWORD: process.env.RDS_PASSWORD,
+  RDS_DATABASE: process.env.RDS_DATABASE,
+  S3_BUCKET: process.env.S3_BUCKET,
+  STRIPE_SECRET_KEY: process.env.STRIPE_SECRET_KEY,
+  db,
+  getClientAPI,
+};
