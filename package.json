@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node server.js",
     "dev": "nodemon server.js",
-    "build": "webpack --mode production",
+    "build": "webpack --mode production && node server.js",
+    "clean": "rm -rf dist && rm -rf .next",
     "deploy": "vercel --prod"
   },
   "dependencies": {
@@ -33,4 +34,3 @@
   "author": "Wekom444",
   "license": "MIT"
 }
-
