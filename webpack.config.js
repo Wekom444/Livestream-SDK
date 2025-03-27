@@ -1,25 +1,29 @@
-const path = require("path");
+const path = require('path');
 
 module.exports = {
-  entry: "./server.js", // Entry point of your application
-  target: "node", // Ensure Webpack compiles for Node.js
-  mode: "production",
+  entry: './server.js', // Update if your main file is different
   output: {
-    path: path.resolve(__dirname, "dist"), // Output folder for the compiled files
-    filename: "bundle.js"
+    path: path.resolve(__dirname, 'dist'),
+    filename: 'bundle.js',
   },
-  resolve: {
-    extensions: [".js", ".json"] // Allow these file types in imports
-  },
+  target: 'node', // Ensures Webpack compiles for Node.js
   module: {
     rules: [
       {
-        test: /\.js$/, // Target JavaScript files
+        test: /\.js$/,
         exclude: /node_modules/,
         use: {
-          loader: "babel-loader" // Transpile ES6+ code for better compatibility
-        }
-      }
-    ]
-  }
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-env'],
+          },
+        },
+      },
+    ],
+  },
+  resolve: {
+    alias: {
+      '@src': path.resolve(__dirname, 'src'), // Ensure 'src' exists or remove this
+    },
+  },
 };
